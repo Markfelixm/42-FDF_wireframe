@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"errno.h": "c",
+		"mlx.h": "c",
+		"complex": "c",
+		"cstdio": "c"
+	}
+}
