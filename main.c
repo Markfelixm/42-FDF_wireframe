@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:35:34 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 18:24:13 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:35:27 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 	normalize_map_point_vectors(map);
 	// translate_origin_to_center(map);
 	ctx.map.scalar = 500;
-	draw_map(&ctx, &(ctx.map));
+	draw_map(&ctx);
 	mlx_key_hook(ctx.window, key_hook, &ctx);
 	mlx_mouse_hook(ctx.window, click_hook, &ctx);
 	mlx_hook(ctx.window, ON_DESTROY, 0, destroy_hook, &ctx);

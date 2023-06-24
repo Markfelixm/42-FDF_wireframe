@@ -6,13 +6,13 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:20:59 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/18 17:14:33 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:39:44 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	at(t_map *map, int column, int row)
+int	at(const t_map *map, int column, int row)
 {
 	return (row * map->width + column);
 }

@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:20:49 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 18:20:38 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:44:19 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ t_vec2	scale_vec2(t_vec2 *vec, double scalar)
 		vec->y * scalar});
 }
 
-t_vec2	flatten_vec4(t_vec4 *vec)
+t_vec2	flatten_vec4(const t_vec4 *vec)
 {
 	return ((t_vec2) {vec->x - vec->y,
 		vec->x + vec->y - vec->z});
 }
 
-t_vec2	screen_space(t_vec4 *vec, double scalar)
+t_vec2	screen_space(const t_vec4 *vec, double scalar)
 {
 	t_vec2	out;
 

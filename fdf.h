@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:51:39 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 18:22:03 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:44:13 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,8 +168,8 @@ int		create_trgb(int t, int r, int g, int b);
 void	pixel_to_image(t_context *ctx, int x, int y, int color);
 t_bres	init_bres(t_vec2 *from, t_vec2 *to);
 void	draw_line(t_context *ctx, t_vec2 *from, t_vec2 *to);
-void	draw_segment(t_context *ctx, t_map *map, int x, int y);
-void	draw_map(t_context *ctx, t_map *map);
+void	draw_segment(t_context *ctx, int x, int y);
+void	draw_map(t_context *ctx);
 
 // normalize.c
 void	set_normalizer(t_map *map);
@@ -186,8 +186,8 @@ double	distance_between_points(t_point from, t_point to);
 double	vec4_product(t_vec4 *a, t_vec4 *b);
 double	distance_from_origin(t_point *p);
 t_vec2	scale_vec2(t_vec2 *vec, double scalar);
-t_vec2	flatten_vec4(t_vec4 *vec);
-t_vec2	screen_space(t_vec4 *vec, double scalar);
+t_vec2	flatten_vec4(const t_vec4 *vec);
+t_vec2	screen_space(const t_vec4 *vec, double scalar);
 
 // memory.c
 void	init_context(t_context *ctx);
@@ -201,7 +201,7 @@ int		click_hook(int keycode, t_context *ctx);
 int		destroy_hook(int keycode, t_context *ctx);
 
 // utility.c
-int		at(t_map *map, int column, int row);
+int		at(const t_map *map, int column, int row);
 int		hex_to_int(char hex);
 int		get_word_count(char *line);
 

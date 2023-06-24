@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:21:16 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 18:20:32 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:42:27 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ void	draw_line(t_context *ctx, t_vec2 *from, t_vec2 *to)
 	}
 }
 
-void	draw_segment(t_context *ctx, t_map *map, int x, int y)
+void	draw_segment(t_context *ctx, int x, int y)
 {
-	t_point	*points = map->points;
-	t_vec2	from;
-	t_vec2	to;
-
+	const t_map		*map = &(ctx->map);
+	const t_point	*points = map->points;
+	t_vec2			from;
+	t_vec2			to;
 
 	from = screen_space(&(points[at(map, x, y)].vec4), map->scalar);
 	if (y < map->width - 1)
@@ -87,19 +87,18 @@ void	draw_segment(t_context *ctx, t_map *map, int x, int y)
 	}
 }
 
-void	draw_map(t_context *ctx, t_map *map)
+void	draw_map(t_context *ctx)
 {
-	int		x;
-	int		y;
+	const t_map	*map = &(ctx->map);
+	int			x;
+	int			y;
 
 	y = -1;
 	while (++y < map->length)
 	{
 		x = -1;
 		while (++x < map->width)
-		{
-			draw_segment(ctx, map, x, y);
-		}
+			draw_segment(ctx, x, y);
 	}
 	mlx_put_image_to_window(ctx->mlx, ctx->window, ctx->img_ptr, 0, 0);
 }
