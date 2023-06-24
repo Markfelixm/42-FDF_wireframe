@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:51:39 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 18:44:13 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:22:36 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef enum e_key
 	KEY_H = 4,
 	KEY_U = 32,
 	KEY_J = 38,
+	KEY_SPACE = 49,
 	KEY_ESC = 53
 }	t_key;
 
@@ -131,8 +132,9 @@ typedef struct s_map
 	double	rotate_x;
 	double	rotate_y;
 	double	rotate_z;
-	int		translate_x;
-	int		translate_y;
+	double	translate_x;
+	double	translate_y;
+	double	translate_step;
 }			t_map;
 
 typedef struct s_context
@@ -162,7 +164,8 @@ int		get_color(char *word);
 int		create_trgb(int t, int r, int g, int b);
 
 // drawloop.c
-// int		render(t_context *ctx);
+void	blank_image(t_context *ctx);
+int		render(t_context *ctx);
 
 // draw.c
 void	pixel_to_image(t_context *ctx, int x, int y, int color);
@@ -187,18 +190,23 @@ double	vec4_product(t_vec4 *a, t_vec4 *b);
 double	distance_from_origin(t_point *p);
 t_vec2	scale_vec2(t_vec2 *vec, double scalar);
 t_vec2	flatten_vec4(const t_vec4 *vec);
-t_vec2	screen_space(const t_vec4 *vec, double scalar);
+t_vec2	screen_space(t_context *ctx, const t_vec4 *vec);
 
 // memory.c
 void	init_context(t_context *ctx);
 void	free_splits(char **splits);
 void	free_map(t_map *map);
 void	close_window(t_context *ctx, int exit_code);
+void	set_map_defaults(t_map *map);
 
 // hook.c
 int		key_hook(int keycode, t_context *ctx);
 int		click_hook(int keycode, t_context *ctx);
 int		destroy_hook(int keycode, t_context *ctx);
+
+// hook_utility.c
+void	translate_hooks(int keycode, t_context *ctx);
+void	scale_hooks(int keycode, t_context *ctx);
 
 // utility.c
 int		at(const t_map *map, int column, int row);

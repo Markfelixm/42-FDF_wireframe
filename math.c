@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:20:49 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 18:44:19 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:58:18 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,14 @@ t_vec2	flatten_vec4(const t_vec4 *vec)
 		vec->x + vec->y - vec->z});
 }
 
-t_vec2	screen_space(const t_vec4 *vec, double scalar)
+t_vec2	screen_space(t_context *ctx, const t_vec4 *vec)
 {
 	t_vec2	out;
 
+	 //TODO: consider scaling vec4, then flattening
 	out = flatten_vec4(vec);
-	out = scale_vec2(&out, scalar);
+	out = scale_vec2(&out, ctx->map.scalar);
+	out.x += ctx->map.translate_x;
+	out.y += ctx->map.translate_y;
 	return (out);
 }

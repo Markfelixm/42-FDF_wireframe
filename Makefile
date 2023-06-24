@@ -4,13 +4,14 @@ SRC := \
 	parse.c \
 	memory.c \
 	hook.c \
+	hook_utility.c \
 	color.c \
 	math.c \
 	normalize.c \
 	draw.c \
+	drawloop.c \
 	utility.c
-#	drawloop.c \
-	transform.c \
+#	transform.c
 
 LIBFT_DIR := Libft
 LIBFT := $(LIBFT_DIR)/libft.a

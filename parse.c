@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:20:54 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/18 17:15:17 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:19:41 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ bool	parse_file(t_map *map, const char *filename,
 bool	get_map(t_map *map, const char *filename)
 {
 	ft_bzero(map, sizeof(t_map));
+	set_map_defaults(map);
 	if (!parse_file(map, filename, set_dimensions))
 		return (false);
 	map->points = ft_calloc(map->width * map->length, sizeof(t_point));
