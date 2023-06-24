@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.c                                          :+:      :+:    :+:   */
+/*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 12:20:59 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/18 17:14:33 by marmulle         ###   ########.fr       */
+/*   Created: 2023/02/15 12:24:48 by marmulle          #+#    #+#             */
+/*   Updated: 2023/06/18 18:17:01 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	at(t_map *map, int column, int row)
+int	key_hook(int keycode, t_context *ctx)
 {
-	return (row * map->width + column);
+	ft_printf("key hook: %d\n", keycode);
+	if (keycode == KEY_ESC)
+		close_window(ctx, 0);
+	return (keycode);
 }
 
-int	hex_to_int(char hex)
+int	click_hook(int keycode, t_context *ctx)
 {
-	if (hex <= '9')
-		return (hex - '0');
-	if (hex <= 'F')
-		return (hex - 'A' + 10);
-	return (hex - 'a' + 10);
+	(void) ctx;
+	ft_printf("click hook: %d\n", keycode);
+	return (keycode);
 }
 
-int	get_word_count(char *line)
+int	destroy_hook(int keycode, t_context *ctx)
 {
-	char	**splits;
-	int		count;
-
-	splits = ft_split(line, ' ');
-	if (splits == NULL)
-		return (0);
-	count = 0;
-	while (splits[count])
-		count++;
-	free_splits(splits);
-	return (count);
+	(void) ctx;
+	exit(0);
+	return (keycode);
 }

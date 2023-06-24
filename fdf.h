@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:51:39 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/08 22:56:28 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:22:03 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ typedef enum e_key
 	KEY_Y = 16,
 	KEY_H = 4,
 	KEY_U = 32,
-	KEY_J = 38
+	KEY_J = 38,
+	KEY_ESC = 53
 }	t_key;
 
 typedef enum e_pan
@@ -93,6 +94,12 @@ typedef struct s_bres
 	int	y;
 }		t_bres;
 
+typedef struct s_vec2
+{
+	double	x;
+	double	y;
+}			t_vec2;
+
 typedef struct s_vec4
 {
 	double	x;
@@ -117,7 +124,8 @@ typedef struct s_map
 	int		width;
 	int		length;
 
-	double	scaler;
+	double	normalizer;
+	double	scalar;
 	bool	apply_rotate;
 	double	rotate_step;
 	double	rotate_x;
@@ -141,29 +149,35 @@ typedef struct s_context
 	int		endian;
 }			t_context;
 
+// parse.c
+bool	set_dimensions(t_map *map, char *line);
+void	parse_point(t_map *map, char *word);
+bool	parse_points(t_map *map, char *line);
+bool	parse_file(t_map *map, const char *filename,
+			bool (*func)(t_map *, char *));
+bool	get_map(t_map *map, const char *filename);
+
+// color.c
+int		get_color(char *word);
+int		create_trgb(int t, int r, int g, int b);
+
 // drawloop.c
-int		render(t_context *ctx);
+// int		render(t_context *ctx);
 
 // draw.c
 void	pixel_to_image(t_context *ctx, int x, int y, int color);
-void	draw_line(t_vec4 *from, t_vec4 *to, t_context *ctx);
-void	draw_map(t_context *ctx);
-void	draw_edges(t_context *ctx);
-void	blank_image(t_context *ctx);
+t_bres	init_bres(t_vec2 *from, t_vec2 *to);
+void	draw_line(t_context *ctx, t_vec2 *from, t_vec2 *to);
+void	draw_segment(t_context *ctx, t_map *map, int x, int y);
+void	draw_map(t_context *ctx, t_map *map);
 
-// color.c
-int		create_trgb(int t, int r, int g, int b);
-int		hsv_to_trgb(double h, double s, double v);
+// normalize.c
+void	set_normalizer(t_map *map);
+void	normalize_map_point_vectors(t_map *map);
+void	translate_origin_to_center(t_map *map);
 
-// hook.c
-int		key_hook(int keycode, t_context *ctx);
-int		click_hook(int keycode, t_context *ctx);
-int		destroy_hook(int keycode, t_context *ctx);
+// transform.c
 
-// utility.c
-int		hex_to_int(char hex);
-void	close_window(t_context *ctx);
-int		at(t_map *map, int column, int row);
 
 // math.c
 double	lerp(double from, double to, double at);
@@ -171,29 +185,24 @@ double	points_distance_2d(t_point from, t_point to);
 double	distance_between_points(t_point from, t_point to);
 double	vec4_product(t_vec4 *a, t_vec4 *b);
 double	distance_from_origin(t_point *p);
-
-// normalize.c
-int		get_normalizer(t_map *map);
-void	normalize_map_point_vectors(t_map *map);
-t_vec4	scale_vector(t_vec4 *vec, double scaler);
-
-// transform.c
-t_vec4	apply_projection(t_vec4 *vec, t_context *ctx);
-t_vec4	*get_rotator(t_rot_axis axis, double q);
-bool	transform_vector(t_vec4 *vec, t_vec4 *transformer);
-bool	transform_map(t_map *map, t_vec4 *transformer);
-
-// parse.c
-int		get_color(char *word);
-int		get_word_count(char *line);
-bool	set_dimensions(t_map *map, char *line);
-void	parse_point(t_map *map, char *word);
-bool	parse_points(t_map *map, char *line);
-bool	parse_file(t_map *map, const char *filename, bool (*func)(t_map *, char *));
-bool	get_map(t_map *map, const char *filename);
+t_vec2	scale_vec2(t_vec2 *vec, double scalar);
+t_vec2	flatten_vec4(t_vec4 *vec);
+t_vec2	screen_space(t_vec4 *vec, double scalar);
 
 // memory.c
+void	init_context(t_context *ctx);
 void	free_splits(char **splits);
 void	free_map(t_map *map);
+void	close_window(t_context *ctx, int exit_code);
+
+// hook.c
+int		key_hook(int keycode, t_context *ctx);
+int		click_hook(int keycode, t_context *ctx);
+int		destroy_hook(int keycode, t_context *ctx);
+
+// utility.c
+int		at(t_map *map, int column, int row);
+int		hex_to_int(char hex);
+int		get_word_count(char *line);
 
 #endif

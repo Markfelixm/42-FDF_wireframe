@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.c                                          :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 12:20:59 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/18 17:14:33 by marmulle         ###   ########.fr       */
+/*   Created: 2023/02/15 12:21:37 by marmulle          #+#    #+#             */
+/*   Updated: 2023/06/18 18:42:36 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	at(t_map *map, int column, int row)
+int	get_color(char *word)
 {
-	return (row * map->width + column);
+	int	color;
+	int	cursor;
+	int	end;
+
+	word = ft_strchr(word, 'x');
+	if (word == NULL)
+		return (WHITE);
+	end = ft_strlen(++word) - 1;
+	color = 0;
+	cursor = -1;
+	while (++cursor <= end)
+		color += hex_to_int(word[end - cursor]) * pow(16, cursor);
+	return (color);
 }
 
-int	hex_to_int(char hex)
+// TODO: using?
+int	create_trgb(int t, int r, int g, int b)
 {
-	if (hex <= '9')
-		return (hex - '0');
-	if (hex <= 'F')
-		return (hex - 'A' + 10);
-	return (hex - 'a' + 10);
-}
-
-int	get_word_count(char *line)
-{
-	char	**splits;
-	int		count;
-
-	splits = ft_split(line, ' ');
-	if (splits == NULL)
-		return (0);
-	count = 0;
-	while (splits[count])
-		count++;
-	free_splits(splits);
-	return (count);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
