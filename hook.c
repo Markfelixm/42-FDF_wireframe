@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfm <mfm@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:24:48 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 20:21:54 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/02 18:46:57 by mfm              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int	key_hook(int keycode, t_context *ctx)
 		scale_hooks(keycode, ctx);
 	else if (keycode == KEY_SPACE)
 		set_map_defaults(&(ctx->map));
+	else if (keycode == KEY_UP || keycode == KEY_DOWN
+		|| keycode == KEY_LEFT || keycode == KEY_RIGHT)
+		rotate_hooks(keycode, ctx);
 	return (keycode);
 }
 

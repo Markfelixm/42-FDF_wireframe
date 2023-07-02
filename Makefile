@@ -17,9 +17,11 @@ LIBFT_DIR := Libft
 LIBFT := $(LIBFT_DIR)/libft.a
 
 CC := cc
-CC_FLAG := -Wall -Wextra -Werror -g #-fsanitize=address,undefined # TODO: clean this
+CC_FLAG := -Wall -Wextra -Werror -Ofast
 
-LINK := -l m -l mlx -framework OpenGL -framework AppKit
+LINK := -l m -l mlx -framework OpenGL -framework AppKit -I minilibx_macos/
+
+DEBUG := -g -fsanitize=address,undefined -O0
 
 .PHONY: all clean fclean re
 
@@ -41,3 +43,7 @@ fclean: clean
 	@make fclean -C $(LIBFT_DIR)
 
 re: fclean all
+
+debug: $(LIBFT)
+	@echo "Compiling debug..."
+	@$(CC) $(CC_FLAG) $(LINK) $(DEBUG) $(SRC) $(LIBFT) -o $(NAME)

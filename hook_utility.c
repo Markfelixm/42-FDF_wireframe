@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_utility.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfm <mfm@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:55:11 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 20:25:23 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/02 23:11:25 by mfm              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,20 @@ void	scale_hooks(int keycode, t_context *ctx)
 	else if (keycode == KEY_F)
 		ctx->map.scalar *= 0.8;
 }
+
+void	rotate_hooks(int keycode, t_context *ctx)
+{
+	if (keycode == KEY_UP)
+		ctx->map.rotate_y += 0.05;
+	else if (keycode == KEY_DOWN)
+		ctx->map.rotate_y -= 0.05;
+	else if (keycode == KEY_LEFT)
+		ctx->map.rotate_x += 0.05;
+	else if (keycode == KEY_RIGHT)
+		ctx->map.rotate_x -= 0.05;
+}
+
+// void	parallel_projection_hook(int keycode, t_context *ctx)
+// {
+
+// }

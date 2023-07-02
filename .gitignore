@@ -1,2 +1,7 @@
 *.o
 *dSYM
+minilibx*
+fdf
+.vscode
+.DS_Store
+Libft.a

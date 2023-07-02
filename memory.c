@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfm <mfm@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:50:55 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 20:20:37 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/02 23:05:22 by mfm              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,6 @@ void	set_map_defaults(t_map *map)
 	map->translate_step = 10.0;
 	map->translate_x = WIDTH / 2;
 	map->translate_y = HEIGHT / 2;
+	map->rotate_x = 0;
+	map->rotate_y = M_PI / 6;
 }

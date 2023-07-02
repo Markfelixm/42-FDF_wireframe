@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfm <mfm@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:51:39 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 20:22:36 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/02 23:13:43 by mfm              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@
 
 # define WHITE 0x00FFFFFF
 
-# define SQRT6 2.44948974278 // TODO: need?
-
 typedef enum e_key
 {
 	KEY_W = 13,
@@ -54,7 +52,11 @@ typedef enum e_key
 	KEY_U = 32,
 	KEY_J = 38,
 	KEY_SPACE = 49,
-	KEY_ESC = 53
+	KEY_ESC = 53,
+	KEY_UP = 126,
+	KEY_DOWN = 125,
+	KEY_LEFT = 123,
+	KEY_RIGHT = 124,
 }	t_key;
 
 typedef enum e_pan
@@ -189,7 +191,8 @@ double	distance_between_points(t_point from, t_point to);
 double	vec4_product(t_vec4 *a, t_vec4 *b);
 double	distance_from_origin(t_point *p);
 t_vec2	scale_vec2(t_vec2 *vec, double scalar);
-t_vec2	flatten_vec4(const t_vec4 *vec);
+// t_vec2	flatten_vec4(const t_vec4 *vec); // TODO: remove
+t_vec2	flatten_vec4(const t_vec4 *vec, double rotate_x, double rotate_y);
 t_vec2	screen_space(t_context *ctx, const t_vec4 *vec);
 
 // memory.c
@@ -207,6 +210,7 @@ int		destroy_hook(int keycode, t_context *ctx);
 // hook_utility.c
 void	translate_hooks(int keycode, t_context *ctx);
 void	scale_hooks(int keycode, t_context *ctx);
+void	rotate_hooks(int keycode, t_context *ctx);
 
 // utility.c
 int		at(const t_map *map, int column, int row);
