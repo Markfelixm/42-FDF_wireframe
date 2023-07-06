@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfm <mfm@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:51:39 by marmulle          #+#    #+#             */
-/*   Updated: 2023/07/02 23:13:43 by mfm              ###   ########.fr       */
+/*   Updated: 2023/07/06 15:32:26 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,42 @@
 
 typedef enum e_key
 {
-	KEY_W = 13,
-	KEY_A = 0,
-	KEY_S = 1,
-	KEY_D = 2,
-	KEY_Q = 12,
-	KEY_E = 14,
 	KEY_1 = 18,
 	KEY_2 = 19,
 	KEY_3 = 20,
 	KEY_4 = 21,
-	KEY_5 = 22,
+	KEY_5 = 23,
+	KEY_6 = 22,
+	KEY_7 = 26,
+	KEY_8 = 28,
+	KEY_9 = 25,
+	KEY_0 = 29,
+	KEY_Q = 12,
+	KEY_A = 0,
+	KEY_Z = 6,
+	KEY_W = 13,
+	KEY_S = 1,
+	KEY_X = 7,
+	KEY_E = 14,
+	KEY_D = 2,
+	KEY_C = 8,
 	KEY_R = 15,
 	KEY_F = 3,
+	KEY_V = 9,
 	KEY_T = 17,
 	KEY_G = 5,
+	KEY_B = 11,
 	KEY_Y = 16,
 	KEY_H = 4,
+	KEY_N = 45,
 	KEY_U = 32,
 	KEY_J = 38,
+	KEY_M= 46,
+	KEY_I = 34,
+	KEY_K = 40,
+	KEY_O = 31,
+	KEY_L = 37,
+	KEY_P = 35,
 	KEY_SPACE = 49,
 	KEY_ESC = 53,
 	KEY_UP = 126,
@@ -103,13 +120,12 @@ typedef struct s_vec2
 	double	y;
 }			t_vec2;
 
-typedef struct s_vec4
+typedef struct s_vec3
 {
 	double	x;
 	double	y;
 	double	z;
-	double	w;
-}			t_vec4;
+}			t_vec3;
 
 typedef struct s_point
 {
@@ -117,7 +133,7 @@ typedef struct s_point
 	int		y;
 	int		z;
 	int		color;
-	t_vec4	vec4;
+	t_vec3	vec3;
 }			t_point;
 
 typedef struct s_map
@@ -130,6 +146,9 @@ typedef struct s_map
 	double	normalizer;
 	double	scalar;
 	bool	apply_rotate;
+	double	squash_x;
+	double	squash_y;
+	double	squash_z;
 	double	rotate_step;
 	double	rotate_x;
 	double	rotate_y;
@@ -188,12 +207,11 @@ void	translate_origin_to_center(t_map *map);
 double	lerp(double from, double to, double at);
 double	points_distance_2d(t_point from, t_point to);
 double	distance_between_points(t_point from, t_point to);
-double	vec4_product(t_vec4 *a, t_vec4 *b);
+double	vec3_product(t_vec3 *a, t_vec3 *b);
 double	distance_from_origin(t_point *p);
 t_vec2	scale_vec2(t_vec2 *vec, double scalar);
-// t_vec2	flatten_vec4(const t_vec4 *vec); // TODO: remove
-t_vec2	flatten_vec4(const t_vec4 *vec, double rotate_x, double rotate_y);
-t_vec2	screen_space(t_context *ctx, const t_vec4 *vec);
+t_vec2	flatten_vec3(t_context *ctx, const t_vec3 *vec);
+t_vec2	screen_space(t_context *ctx, const t_vec3 *vec);
 
 // memory.c
 void	init_context(t_context *ctx);
@@ -210,7 +228,9 @@ int		destroy_hook(int keycode, t_context *ctx);
 // hook_utility.c
 void	translate_hooks(int keycode, t_context *ctx);
 void	scale_hooks(int keycode, t_context *ctx);
+void	squash_hooks(int keycode, t_context *ctx);
 void	rotate_hooks(int keycode, t_context *ctx);
+void	parallel_projection_hook(int keycode, t_context *ctx);
 
 // utility.c
 int		at(const t_map *map, int column, int row);

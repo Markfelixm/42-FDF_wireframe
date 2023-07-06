@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:21:16 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 20:36:37 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:52:44 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,15 @@ void	draw_segment(t_context *ctx, int x, int y)
 	t_vec2			from;
 	t_vec2			to;
 
-	from = screen_space(ctx, &(points[at(map, x, y)].vec4));
+	from = screen_space(ctx, &(points[at(map, x, y)].vec3));
 	if (x < map->width - 1)
 	{
-		to = screen_space(ctx, &(points[at(map, x + 1, y)].vec4));
+		to = screen_space(ctx, &(points[at(map, x + 1, y)].vec3));
 		draw_line(ctx, &from, &to);
 	}
 	if (y < map->length - 1)
 	{
-		to = screen_space(ctx, &(points[at(map, x, y + 1)].vec4));
+		to = screen_space(ctx, &(points[at(map, x, y + 1)].vec3));
 		draw_line(ctx, &from, &to);
 	}
 }

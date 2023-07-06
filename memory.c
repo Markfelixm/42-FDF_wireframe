@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfm <mfm@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:50:55 by marmulle          #+#    #+#             */
-/*   Updated: 2023/07/02 23:05:22 by mfm              ###   ########.fr       */
+/*   Updated: 2023/07/06 15:33:24 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,14 @@ void	close_window(t_context *ctx, int exit_code)
 
 void	set_map_defaults(t_map *map)
 {
-	map->scalar = 270.0;
+	map->scalar = 270.0; // TODO: dynamic calculate
 	map->translate_step = 10.0;
 	map->translate_x = WIDTH / 2;
 	map->translate_y = HEIGHT / 2;
+	map->squash_x = 0;
+	map->squash_y = M_PI / 6;
+	map->squash_z = 0;
 	map->rotate_x = 0;
-	map->rotate_y = M_PI / 6;
+	map->rotate_y = 0;
+
 }

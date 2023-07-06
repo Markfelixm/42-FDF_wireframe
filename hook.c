@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfm <mfm@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:24:48 by marmulle          #+#    #+#             */
-/*   Updated: 2023/07/02 18:46:57 by mfm              ###   ########.fr       */
+/*   Updated: 2023/07/06 15:34:05 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,20 @@ int	key_hook(int keycode, t_context *ctx)
 		close_window(ctx, 0);
 	else if (keycode == KEY_W || keycode == KEY_S
 		|| keycode == KEY_A || keycode == KEY_D
-		|| keycode == KEY_Q || keycode == KEY_E)
+		|| keycode == KEY_Z || keycode == KEY_X
+		|| keycode == KEY_C)
 		translate_hooks(keycode, ctx);
-	else if (keycode == KEY_R || keycode == KEY_F)
+	else if (keycode == KEY_V || keycode == KEY_B || keycode == KEY_N)
 		scale_hooks(keycode, ctx);
 	else if (keycode == KEY_SPACE)
 		set_map_defaults(&(ctx->map));
-	else if (keycode == KEY_UP || keycode == KEY_DOWN
-		|| keycode == KEY_LEFT || keycode == KEY_RIGHT)
+	else if (keycode == KEY_P)
+		parallel_projection_hook(keycode, ctx);
+	else if (keycode == KEY_U || keycode == KEY_J
+		|| keycode == KEY_I || keycode == KEY_K
+		|| keycode == KEY_O || keycode == KEY_L)
+		squash_hooks(keycode, ctx);
+	else if (keycode == KEY_R || keycode == KEY_F)
 		rotate_hooks(keycode, ctx);
 	return (keycode);
 }
