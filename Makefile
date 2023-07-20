@@ -8,10 +8,10 @@ SRC := \
 	color.c \
 	math.c \
 	normalize.c \
+	projection.c \
 	draw.c \
 	drawloop.c \
 	utility.c
-#	transform.c
 
 LIBFT_DIR := Libft
 LIBFT := $(LIBFT_DIR)/libft.a

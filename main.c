@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:35:34 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 20:20:35 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/20 15:40:19 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ int	main(int ac, char **av)
 	t_context	ctx;
 	t_map		*map;
 
+	// TODO: do not turn in .fdf to vogosphere
+	// TODO: recheck for leaks
+	// TODO: rotation
+	// TODO: parallel projection
 	if (ac != 2)
 		return (ft_printf("Invalid number of arguments.\n"));
 	map = &(ctx.map);

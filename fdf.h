@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:51:39 by marmulle          #+#    #+#             */
-/*   Updated: 2023/07/06 15:32:26 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/20 16:34:38 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define HEIGHT 900
 
 # define WHITE 0x00FFFFFF
+
+typedef unsigned int	t_uint;
 
 typedef enum e_key
 {
@@ -84,7 +86,7 @@ typedef enum e_pan
 	RIGHT
 }	t_pan;
 
-typedef enum e_rot_axis
+typedef enum e_rot_axis // TODO: rm if not using
 {
 	RZ,
 	RX,
@@ -114,11 +116,12 @@ typedef struct s_bres
 	int	y;
 }		t_bres;
 
-typedef struct s_vec2
+typedef struct s_vec2c
 {
 	double	x;
 	double	y;
-}			t_vec2;
+	t_uint	color;
+}			t_vec2c;
 
 typedef struct s_vec3
 {
@@ -132,11 +135,11 @@ typedef struct s_point
 	int		x;
 	int		y;
 	int		z;
-	int		color;
+	t_uint	color;
 	t_vec3	vec3;
 }			t_point;
 
-typedef struct s_map
+typedef struct s_map // TODO: clean unused attributes
 {
 	t_point	*points;
 
@@ -145,17 +148,15 @@ typedef struct s_map
 
 	double	normalizer;
 	double	scalar;
-	bool	apply_rotate;
-	double	squash_x;
-	double	squash_y;
-	double	squash_z;
-	double	rotate_step;
-	double	rotate_x;
-	double	rotate_y;
-	double	rotate_z;
 	double	translate_x;
 	double	translate_y;
 	double	translate_step;
+	double	rotate;
+	double	rotate_step;
+	double	squash_x;
+	double	squash_y;
+	double	squash_z;
+	double	squash_step;
 }			t_map;
 
 typedef struct s_context
@@ -181,8 +182,9 @@ bool	parse_file(t_map *map, const char *filename,
 bool	get_map(t_map *map, const char *filename);
 
 // color.c
-int		get_color(char *word);
-int		create_trgb(int t, int r, int g, int b);
+t_uint	lerp_color(t_uint from, t_uint to, double at);
+t_uint	get_color(char *word);
+t_uint	create_trgb(int t, int r, int g, int b);
 
 // drawloop.c
 void	blank_image(t_context *ctx);
@@ -190,8 +192,8 @@ int		render(t_context *ctx);
 
 // draw.c
 void	pixel_to_image(t_context *ctx, int x, int y, int color);
-t_bres	init_bres(t_vec2 *from, t_vec2 *to);
-void	draw_line(t_context *ctx, t_vec2 *from, t_vec2 *to);
+t_bres	init_bres(t_vec2c *from, t_vec2c *to);
+void	draw_line(t_context *ctx, t_vec2c *from, t_vec2c *to);
 void	draw_segment(t_context *ctx, int x, int y);
 void	draw_map(t_context *ctx);
 
@@ -199,19 +201,18 @@ void	draw_map(t_context *ctx);
 void	set_normalizer(t_map *map);
 void	normalize_map_point_vectors(t_map *map);
 void	translate_origin_to_center(t_map *map);
+double	distance_from_origin(t_point *p);
 
-// transform.c
-
+// projection.c
+t_vec2c	flatten_vec3(t_context *ctx, t_vec3 *vec);
+t_vec2c	screen_space(t_context *ctx, t_vec3 *vec, t_uint color);
 
 // math.c
+t_uint	unsigned_pow(t_uint base, t_uint exp);
 double	lerp(double from, double to, double at);
-double	points_distance_2d(t_point from, t_point to);
-double	distance_between_points(t_point from, t_point to);
+double	vec2c_distance(t_vec2c *from, t_vec2c *to);
 double	vec3_product(t_vec3 *a, t_vec3 *b);
-double	distance_from_origin(t_point *p);
-t_vec2	scale_vec2(t_vec2 *vec, double scalar);
-t_vec2	flatten_vec3(t_context *ctx, const t_vec3 *vec);
-t_vec2	screen_space(t_context *ctx, const t_vec3 *vec);
+t_vec2c	scale_vec2(t_vec2c *vec, double scalar);
 
 // memory.c
 void	init_context(t_context *ctx);

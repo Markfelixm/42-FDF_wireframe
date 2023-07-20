@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:02:52 by marmulle          #+#    #+#             */
-/*   Updated: 2023/07/06 14:54:59 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/20 15:48:31 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,14 @@ void	translate_origin_to_center(t_map *map)
 		map->points[i].vec3.y = map->points[i].vec3.y * 2.0 - 1.0;
 		map->points[i].vec3.z = map->points[i].vec3.z * 2.0 - 1.0;
 	}
+}
+
+double	distance_from_origin(t_point *p)
+{
+	// return (sqrt(pow(p->x, 2)
+	// 		+ pow(p->y, 2)
+	// 		+ pow(p->z, 2)));
+	return (sqrt(p->x * p->x
+			+ p->y * p->y
+			+ p->z * p->z));
 }

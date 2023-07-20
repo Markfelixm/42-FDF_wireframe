@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:20:54 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 20:19:41 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/20 15:29:47 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	parse_point(t_map *map, char *word)
 	static int	y = 0;
 	int			i;
 
+	if (*word == ' ' || *word == '\n')
+		return ;
 	i = at(map, x, y);
 	map->points[i].x = x;
 	map->points[i].y = y;
@@ -69,7 +71,7 @@ bool	parse_file(t_map *map, const char *filename,
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		(perror("Error opening file: "), exit(errno));
+		(perror("Error opening file"), exit(errno));
 	while (42)
 	{
 		line = get_next_line(fd);
@@ -80,7 +82,7 @@ bool	parse_file(t_map *map, const char *filename,
 		free(line);
 	}
 	if (close(fd))
-		(perror("Error closing file: "), exit(errno));
+		(perror("Error closing file"), exit(errno));
 	return (true);
 }
 

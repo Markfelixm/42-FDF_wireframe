@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:20:59 by marmulle          #+#    #+#             */
-/*   Updated: 2023/06/24 18:39:44 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/20 15:29:16 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ int	get_word_count(char *line)
 	if (splits == NULL)
 		return (0);
 	count = 0;
-	while (splits[count])
+	while (splits[count] 
+		&& splits[count][0] != ' ' 
+		&& splits[count][0] != '\n')
 		count++;
 	free_splits(splits);
 	return (count);
