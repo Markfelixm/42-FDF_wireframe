@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:35:34 by marmulle          #+#    #+#             */
-/*   Updated: 2023/07/20 15:40:19 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:52:36 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ int	main(int ac, char **av)
 	t_context	ctx;
 	t_map		*map;
 
-	// TODO: do not turn in .fdf to vogosphere
+	// TODO: do not turn in .fdf to vogosphere and make sure libft is copied there
 	// TODO: recheck for leaks
-	// TODO: rotation
-	// TODO: parallel projection
 	if (ac != 2)
 		return (ft_printf("Invalid number of arguments.\n"));
 	map = &(ctx.map);
@@ -29,7 +27,7 @@ int	main(int ac, char **av)
 	init_context(&ctx);
 	set_normalizer(map);
 	normalize_map_point_vectors(map);
-	translate_origin_to_center(map);
+	translate_center_to_origin(map);
 	mlx_key_hook(ctx.window, key_hook, &ctx);
 	mlx_mouse_hook(ctx.window, click_hook, &ctx);
 	mlx_hook(ctx.window, ON_DESTROY, 0, destroy_hook, &ctx);

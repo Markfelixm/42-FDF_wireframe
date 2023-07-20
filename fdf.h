@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:51:39 by marmulle          #+#    #+#             */
-/*   Updated: 2023/07/20 20:56:30 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:50:33 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ typedef enum e_proj
 {
 	ISO,
 	CONIC,
-	STEREO,
 	ORTHO,
 	PROJ_COUNT
 }	t_proj;
@@ -141,7 +140,7 @@ typedef struct s_point
 	t_vec3	vec3;
 }			t_point;
 
-typedef struct s_map // TODO: clean unused attributes
+typedef struct s_map
 {
 	t_point	*points;
 
@@ -185,8 +184,8 @@ bool	parse_file(t_map *map, const char *filename,
 bool	get_map(t_map *map, const char *filename);
 
 // color.c
-t_uint	lerp_color(t_uint from, t_uint to, double at);
 t_uint	get_color(char *word);
+t_uint	lerp_color(t_uint from, t_uint to, double at);
 t_uint	create_trgb(int t, int r, int g, int b);
 
 // drawloop.c
@@ -203,11 +202,13 @@ void	draw_map(t_context *ctx);
 // normalize.c
 void	set_normalizer(t_map *map);
 void	normalize_map_point_vectors(t_map *map);
-void	translate_origin_to_center(t_map *map);
+void	translate_center_to_origin(t_map *map);
 double	distance_from_origin(t_point *p);
 
 // projection.c
+t_vec2c	project_conical(t_context *ctx, t_vec3 *vec);
 t_vec2c	flatten_vec3(t_context *ctx, t_vec3 *vec);
+t_vec3	squash_vec3(t_context *ctx, t_vec3 *vec);
 t_vec2c	screen_space(t_context *ctx, t_vec3 *vec, t_uint color);
 
 // math.c
@@ -233,7 +234,7 @@ void	translate_hooks(int keycode, t_context *ctx);
 void	scale_hooks(int keycode, t_context *ctx);
 void	squash_hooks(int keycode, t_context *ctx);
 void	rotate_hooks(int keycode, t_context *ctx);
-void	parallel_projection_hook(int keycode, t_context *ctx);
+void	projection_hook(int keycode, t_context *ctx);
 
 // utility.c
 int		at(const t_map *map, int column, int row);

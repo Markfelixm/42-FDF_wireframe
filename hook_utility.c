@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:55:11 by marmulle          #+#    #+#             */
-/*   Updated: 2023/07/20 21:16:57 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:50:33 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	rotate_hooks(int keycode, t_context *ctx)
 		ctx->map.rotate_step = 0.1;
 }
 
-void	parallel_projection_hook(int keycode, t_context *ctx)
+void	projection_hook(int keycode, t_context *ctx)
 {
 	(void) keycode;
 	ctx->map.projection = ++ctx->map.projection % PROJ_COUNT;

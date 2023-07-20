@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:02:52 by marmulle          #+#    #+#             */
-/*   Updated: 2023/07/20 15:48:31 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/20 22:46:58 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	normalize_map_point_vectors(t_map *map)
 	}
 }
 
-void	translate_origin_to_center(t_map *map)
+void	translate_center_to_origin(t_map *map)
 {
 	int	i;
 
@@ -69,9 +69,6 @@ void	translate_origin_to_center(t_map *map)
 
 double	distance_from_origin(t_point *p)
 {
-	// return (sqrt(pow(p->x, 2)
-	// 		+ pow(p->y, 2)
-	// 		+ pow(p->z, 2)));
 	return (sqrt(p->x * p->x
 			+ p->y * p->y
 			+ p->z * p->z));
