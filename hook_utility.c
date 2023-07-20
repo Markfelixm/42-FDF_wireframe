@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:55:11 by marmulle          #+#    #+#             */
-/*   Updated: 2023/07/20 16:55:08 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/20 21:16:57 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	scale_hooks(int keycode, t_context *ctx)
 {
 	if (keycode == KEY_V || keycode == KEY_4)
 		ctx->map.scalar *= 0.8;
-	else if (keycode == KEY_F || keycode == KEY_5
-		|| ctx->map.scalar <= 0.0)
-		ctx->map.scalar = HEIGHT * 0.25;
 	else if (keycode == KEY_R || keycode == KEY_6)
 		ctx->map.scalar *= 1.2;
+	if (keycode == KEY_F || keycode == KEY_5
+		|| ctx->map.scalar <= 0.0)
+		ctx->map.scalar = HEIGHT * 0.25;
 }
 
 void	squash_hooks(int keycode, t_context *ctx)
@@ -80,5 +80,5 @@ void	rotate_hooks(int keycode, t_context *ctx)
 void	parallel_projection_hook(int keycode, t_context *ctx)
 {
 	(void) keycode;
-	(void) ctx;
+	ctx->map.projection = ++ctx->map.projection % PROJ_COUNT;
 }

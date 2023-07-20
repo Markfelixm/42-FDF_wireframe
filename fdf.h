@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:51:39 by marmulle          #+#    #+#             */
-/*   Updated: 2023/07/20 16:34:38 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/20 20:56:30 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,14 @@ typedef enum e_pan
 	RIGHT
 }	t_pan;
 
-typedef enum e_rot_axis // TODO: rm if not using
+typedef enum e_proj
 {
-	RZ,
-	RX,
-	RY
-}	t_rot_axis;
+	ISO,
+	CONIC,
+	STEREO,
+	ORTHO,
+	PROJ_COUNT
+}	t_proj;
 
 enum e_events
 {
@@ -146,6 +148,7 @@ typedef struct s_map // TODO: clean unused attributes
 	int		width;
 	int		length;
 
+	t_proj	projection;
 	double	normalizer;
 	double	scalar;
 	double	translate_x;
@@ -211,7 +214,6 @@ t_vec2c	screen_space(t_context *ctx, t_vec3 *vec, t_uint color);
 t_uint	unsigned_pow(t_uint base, t_uint exp);
 double	lerp(double from, double to, double at);
 double	vec2c_distance(t_vec2c *from, t_vec2c *to);
-double	vec3_product(t_vec3 *a, t_vec3 *b);
 t_vec2c	scale_vec2(t_vec2c *vec, double scalar);
 
 // memory.c

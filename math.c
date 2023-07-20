@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:20:49 by marmulle          #+#    #+#             */
-/*   Updated: 2023/07/20 15:49:41 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:30:32 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@ double	vec2c_distance(t_vec2c *from, t_vec2c *to)
 	// delta_sq.x = pow(to->x - from->x, 2);
 	// delta_sq.y = pow(to->y - from->y, 2);
 	return (sqrt(delta_sq.x + delta_sq.y));
-}
-
-double	vec3_product(t_vec3 *a, t_vec3 *b)
-{
-	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
 
 t_vec2c	scale_vec2(t_vec2c *vec, double scalar)

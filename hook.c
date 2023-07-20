@@ -6,7 +6,7 @@
 /*   By: marmulle <marmulle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:24:48 by marmulle          #+#    #+#             */
-/*   Updated: 2023/07/20 16:53:13 by marmulle         ###   ########.fr       */
+/*   Updated: 2023/07/20 19:47:33 by marmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ int	key_hook(int keycode, t_context *ctx)
 		|| keycode == KEY_7 || keycode == KEY_8 || keycode == KEY_9)
 		squash_hooks(keycode, ctx);
 	else if (keycode == KEY_Q || keycode == KEY_E
-		|| keycode == KEY_1 || keycode == KEY_2 || keycode == KEY_3)
+		|| keycode == KEY_1 || keycode == KEY_2 || keycode == KEY_3
+		|| keycode == KEY_T || keycode == KEY_G
+		|| keycode == KEY_Y || keycode == KEY_H)
 		rotate_hooks(keycode, ctx);
 	return (keycode);
 }
